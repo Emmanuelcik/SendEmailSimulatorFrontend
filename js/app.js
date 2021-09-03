@@ -1,5 +1,6 @@
 //Variables
 const enivar = document.querySelector("#enviar");
+const reset = document.querySelector("#resetBtn")
 //variables para campos
 const email = document.querySelector("#email");
 const asunto = document.querySelector("#asunto");
@@ -15,6 +16,11 @@ function eventListener() {
     email.addEventListener("blur", validarFormulario);
     asunto.addEventListener("blur", validarFormulario);
     mensaje.addEventListener("blur", validarFormulario);
+
+
+    form.addEventListener("submit", enviarEmail);
+
+    reset.addEventListener("click", reseteador);
 }
 //Fucniones
 
@@ -59,6 +65,9 @@ function validarFormulario (e) {
     if(er.test(email.value) && mensaje.value !== "" && asunto.value !== "" ){
         enivar.disables = false;
         enivar.classList.remove("cursor-not-allowed", "opacity-50");
+    }else {
+        enivar.disables = true;
+        enivar.classList.add("cursor-not-allowed", "opacity-50");
     }
 }
 function mostarError (mensaje) {
@@ -70,4 +79,37 @@ function mostarError (mensaje) {
         form.appendChild(mensajeError);
     }
     
+}
+function enviarEmail (e) {
+    e.preventDefault();
+
+    //mostrar el spinner
+    const spinner = document.querySelector("#spinner");
+    spinner.style.display = "flex";
+
+    //3 seg despues
+
+    setTimeout(  ()=>{
+        spinner.style.display = "none";
+
+        const parrafo = document.createElement("p");
+        parrafo.textContent = "Enviado correctamente!";
+        parrafo.classList.add("text-center", "my-10", "p-2", "bg-green-500", "text-white", "uppercase");
+        form.insertBefore(parrafo, spinner);
+
+        setTimeout( () => {
+            parrafo.remove();
+            resetearFormulario();
+        })
+    }, 3000)
+}
+
+function resetearFormulario() {
+    form.reset();
+    inicarApp();
+}
+
+function reseteador (e) {
+    e.preventDefault();
+    resetearFormulario();
 }
