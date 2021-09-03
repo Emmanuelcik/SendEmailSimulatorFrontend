@@ -19,7 +19,6 @@ function eventListener() {
 //Fucniones
 
 function inicarApp() {
-    console.log ("Iniciando");
     enivar.disables = true;
     enivar.classList.add("cursor-not-allowed", "opacity-50");
 }
@@ -57,10 +56,9 @@ function validarFormulario (e) {
         }
     }
 
-    if(er.test(e.target.value) && mensaje.value !== "" && asunto.value !== "" ){
-        console.log("Pasaste la validacion")
-    }else{
-        console.log("no paso")
+    if(er.test(email.value) && mensaje.value !== "" && asunto.value !== "" ){
+        enivar.disables = false;
+        enivar.classList.remove("cursor-not-allowed", "opacity-50");
     }
 }
 function mostarError (mensaje) {
