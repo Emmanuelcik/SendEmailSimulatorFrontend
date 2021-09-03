@@ -4,6 +4,7 @@ const enivar = document.querySelector("#enviar");
 const email = document.querySelector("#email");
 const asunto = document.querySelector("#asunto");
 const mensaje = document.querySelector("#mensaje");
+const form = document.querySelector("#enviar-mail");
 
 eventListener();
 function eventListener() {
@@ -26,7 +27,17 @@ function validarFormulario (e) {
     if(e.target.value.length > 0){
         console.log ("hay cosas");
     }else {
-        e.target.classList.add("border", "border-red-500")
+        e.target.classList.add("border", "border-red-500");
+        mostarError();
     }
 }
-//EventListeners
+function mostarError () {
+    const mensajeError = document.createElement("p");
+    mensajeError.textContent = "Todos los campos son obligatorios";
+    mensajeError.classList.add("border", "border-red-500", "background-color-100", "text-red-500", "p-3", "mt-3", "text-center", "error");
+    const errores = document.querySelectorAll(".error");
+    if(errores.length === 0){
+        form.appendChild(mensajeError);
+    }
+    
+}
