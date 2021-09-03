@@ -28,12 +28,19 @@ function validarFormulario (e) {
         console.log ("hay cosas");
     }else {
         e.target.classList.add("border", "border-red-500");
-        mostarError();
+        mostarError("Todos los campos son obligatorios");
+    }
+
+    if(e.target.type === "email" ) {
+        const resultado = e.target.value.indexOf("@");
+        if (resultado < 0 ){
+            mostarError("Email no válido");
+        }
     }
 }
-function mostarError () {
+function mostarError (mensaje) {
     const mensajeError = document.createElement("p");
-    mensajeError.textContent = "Todos los campos son obligatorios";
+    mensajeError.textContent = mensaje;
     mensajeError.classList.add("border", "border-red-500", "background-color-100", "text-red-500", "p-3", "mt-3", "text-center", "error");
     const errores = document.querySelectorAll(".error");
     if(errores.length === 0){
